@@ -1,0 +1,42 @@
+{
+  "name": "uselist",
+  "version": "1.0.0",
+  "description": "Useless lists",
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^6.5.0",
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "browser-sync": "^2.17.0",
+    "imagemin-cli": "^3.0.0",
+    "node-sass": "^3.10.1",
+    "onchange": "^3.0.2",
+    "parallelshell": "^2.0.0",
+    "postcss-cli": "^2.6.0"
+  },
+  "scripts": {
+    "start": "npm run build:css && npm run build:js && npm run imagemin && npm run watch:all",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --output-style compressed -o dist/css src/scss",
+    "autoprefixer": "postcss -u autoprefixer -r dist/css/*",
+    "imagemin": "imagemin src/images/* --out-dir=dist/images",
+    "serve": "browser-sync start --server --files 'dist/css/*.css, dist/js/*.js'",
+    "build:css": "npm run scss && npm run autoprefixer",
+    "build:js": "mkdir -p dist/js && babel -d dist/js src/js",
+    "watch:css": "onchange 'src/scss/*.scss' -- npm run build:css",
+    "watch:js": "onchange 'src/js/*.js' -- npm run build:js",
+    "watch:images": "onchange 'src/images/*' -- npm run imagemin",
+    "watch:all": "parallelshell 'npm run serve' 'npm run watch:css' 'npm run watch:js' 'npm run watch:images'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keale2/uselist.git"
+  },
+  "author": "Kyle Wagner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Keale2/uselist/issues"
+  },
+  "homepage": "https://github.com/Keale2/uselist#readme"
+}
