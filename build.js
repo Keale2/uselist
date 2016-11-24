@@ -4,12 +4,12 @@ var layouts = require('metalsmith-layouts');
 
 
 Metalsmith(__dirname)
-    .source('./src')
-    .destination('./dest')
+    .source('./src/posts')
+    .destination('./dist/posts')
     .use(markdown())
     .use(layouts({
         engine: 'handlebars',
-        directory: 'templates'
+        directory: './src/templates'
     }))
     .build(function (err) {
         // For error handling
